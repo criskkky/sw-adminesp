@@ -1,0 +1,74 @@
+name: "[bug report]"
+description: Create a report for a found bug
+title: "[Bug]: "
+labels: bug
+assignees:
+  - criskkky
+body:
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Short description
+      description: A clear and concise description of the bug
+      placeholder: Describe the bug
+    validations:
+      required: true
+  - type: textarea
+    id: bug-steps
+    attributes:
+      label: To reproduce
+      description: Steps to reproduce the issue
+      placeholder: |
+        1...
+        2...
+        3...
+        ...
+    validations:
+      required: true
+  - type: textarea
+    id: correct-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen
+      placeholder: Describe the expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: bug-screenshot
+    attributes:
+      label: Screenshot, logs, or other media (optional)
+      description: Attach any content that could help us understand the issue
+      placeholder: Please only include the specified content, avoid adding text here
+    validations:
+      required: false
+  - type: dropdown
+    id: os
+    attributes:
+      label: Server OS
+      options:
+        - Windows
+        - Linux
+    validations:
+      required: true
+  - type: input
+    id: metamod-build
+    attributes:
+      label: Metamod Build Number
+      placeholder: e.g. v1285
+    validations:
+      required: true
+  - type: input
+    id: swiftly-build
+    attributes:
+      label: Swiftly Build Number
+      placeholder: e.g. v1.0.0
+    validations:
+      required: true
+  - type: textarea
+    id: bug-context
+    attributes:
+      label: Additional context (optional)
+      description: Provide any additional context about the problem here
+      placeholder: Additional context
+    validations:
+      required: false

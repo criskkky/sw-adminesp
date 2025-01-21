@@ -1,0 +1,16 @@
+{
+	"conventionalCommits.scopes": [
+		"workflow",
+		"README.md",
+		"plugin",
+		"translation",
+		"project"
+	],
+	"conventionalCommits.gitmoji": false,
+	"Lua.diagnostics.disable": [
+		"undefined-field",
+		"param-type-mismatch",
+		"redundant-parameter",
+		"missing-parameter"
+	],
+}

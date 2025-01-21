@@ -1,0 +1,12 @@
+name: "[question]"
+description: Make a question related to the project
+title: "[Question]: "
+labels: question
+body:
+  - type: textarea
+    attributes:
+      label: Question
+      description: Please provide your question in detail here
+      placeholder: "What would you like to ask?"
+    validations:
+      required: true
