@@ -1,0 +1,12 @@
+{
+	"invalid_syntax": {
+		"es": "Uso: !wh o !esp",
+		"en": "Usage: !wh or !esp",
+		"ro": "Utilizare: !wh sau !esp"
+	},
+	"dead_only": {
+		"es": "La configuración indica que debes estar muerto para usar este comando.",
+		"en": "The configuration indicates that you must be dead to use this command.",
+		"ro": "Configurația indică faptul că trebuie să fii mort pentru a folosi această comandă."
+	}
+}
