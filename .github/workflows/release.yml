@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  PLUGIN_NAME: supercommands
+  PLUGIN_NAME: adminesp
   SOURCE_DIR: ./src
   INSTALL_PATH: /game/csgo/addons/swiftly/
 
