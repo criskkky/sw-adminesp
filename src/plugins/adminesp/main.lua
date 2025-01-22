@@ -62,7 +62,11 @@ AddEventHandler("OnPlayerSpawn", function (event)
     playerWallhackModels[indexRelay] = true
     playerWallhackModels[indexGlow] = true
 
-    if config:Fetch("adminesp.dead_only") == true then if player:CBaseEntity().Health > 0 then playerHasWallhack[playerid] = false end end
+    if config:Fetch("adminesp.dead_only") == true then
+        if player:CBaseEntity().Health > 0 and playerHasWallhack[playerid] then
+            playerHasWallhack[playerid] = false
+        end
+    end
 
     return EventResult.Continue
 end)

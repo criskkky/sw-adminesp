@@ -1,5 +1,5 @@
 function GetPluginAuthor()
-	return "criskkky"
+	return "criskkky & m3ntor"
 end
 
 function GetPluginVersion()
@@ -7,7 +7,7 @@ function GetPluginVersion()
 end
 
 function GetPluginName()
-	return "Admins - ESP"
+	return "AdminESP"
 end
 
 function GetPluginWebsite()
