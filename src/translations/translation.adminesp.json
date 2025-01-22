@@ -8,5 +8,10 @@
 		"es": "La configuración indica que debes estar muerto para usar este comando.",
 		"en": "The configuration indicates that you must be dead to use this command.",
 		"ro": "Configurația indică faptul că trebuie să fii mort pentru a folosi această comandă."
+	},
+	"spec_only": {
+		"es": "La configuración indica que debes estar en el equipo espectador para usar este comando.",
+		"en": "The configuration indicates that you must be on the spectator team to use this command.",
+		"ro": "Configurația indică faptul că trebuie să fii în echipa de spectatori pentru a folosi această comandă."
 	}
 }

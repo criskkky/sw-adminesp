@@ -1,4 +1,5 @@
 {
 	"dead_only": true,
+	"spec_only": false,
 	"access_flags": "n"
 }

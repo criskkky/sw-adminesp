@@ -113,6 +113,12 @@ commands:Register("wh", function (playerid, args, argsCount, silent, prefix)
             end
         end
 
+        if config:Fetch("adminesp.spec_only") == true then
+            if player:CBaseEntity().TeamNum ~= 1 then
+                return ReplyToCommand(playerid, config:Fetch("admins.prefix"), FetchTranslation("adminesp.spec_only"))
+            end
+        end
+
         playerHasWallhack[playerid] = not playerHasWallhack[playerid]
         local status = tostring(playerHasWallhack[playerid])
 
