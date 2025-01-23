@@ -126,3 +126,26 @@ commands:Register("wh", function (playerid, args, argsCount, silent, prefix)
     end
 end)
 commands:RegisterAlias("wh", "esp")
+
+AddEventHandler("OnPostPlayerTeam", function(p_Event)
+    if p_Event:GetBool("disconnect") then
+        return
+    end
+
+    local l_PlayerId = p_Event:GetInt("userid")
+    local l_Player = GetPlayer(l_PlayerId)
+
+    if not l_Player or not l_Player:IsValid() then
+        return
+    end
+
+    local l_Team = p_Event:GetInt("team")
+
+    NextTick(function()
+        if not l_Player:IsValid() then
+            return
+        end
+
+        l_Player:CBaseEntity().TeamNum = l_Team
+    end)
+end)
