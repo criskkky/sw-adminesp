@@ -27,6 +27,10 @@ AddEventHandler("OnPlayerSpawn", function (event)
     local player = GetPlayer(playerid)
     if not player or not player:IsValid() then return EventResult.Continue end
 
+    if playerHasWallhack[playerid] and player:CBaseEntity().Health > 0 and config:Fetch("adminesp.dead_only") == true then
+        playerHasWallhack[playerid] = false
+    end
+
     local instanceGlow = CreateEntityByName("prop_dynamic")
     local instanceRelay = CreateEntityByName("prop_dynamic")
     if not instanceGlow:IsValid() or not instanceRelay:IsValid() then return EventResult.Continue end
