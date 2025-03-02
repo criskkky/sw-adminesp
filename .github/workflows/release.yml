@@ -11,12 +11,12 @@ env:
 jobs:
   generate-release:
     runs-on: ubuntu-latest
-    environment: SWCS2
     permissions:
       contents: write
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
 
@@ -24,7 +24,7 @@ jobs:
         id: get_version
         run: |
           git fetch --tags
-          LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1` 2>/dev/null || echo "v0.9.9")
+          LATEST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1) 2>/dev/null || echo "v0.9.9")
           echo "Latest tag: $LATEST_TAG"
 
           if [[ $LATEST_TAG == v* ]]; then
@@ -34,7 +34,6 @@ jobs:
           fi
 
           IFS='.' read -r major minor patch <<< "$VERSION"
-
           if [ "$patch" -ge 9 ]; then
             patch=0
             if [ "$minor" -ge 9 ]; then
@@ -59,30 +58,24 @@ jobs:
       - name: Get recent commit messages since last release
         id: get_commits
         run: |
-          # Get the latest tag, or default to a very first commit if no tag exists
-          LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1` 2>/dev/null || echo "no_tag")
+          LATEST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1) 2>/dev/null || echo "no_tag")
 
-          # If no tag exists, use the first commit or empty commit messages
           if [[ "$LATEST_TAG" == "no_tag" ]]; then
             COMMIT_MESSAGES="- Initial Release"
           else
-            # Get commit messages between latest tag and current commit
             COMMIT_MESSAGES=$(git log $LATEST_TAG..HEAD --oneline | sed 's/^/- /')
           fi
 
-          # Save commit messages to GITHUB_ENV and preserve the line breaks by escaping them
           echo "COMMIT_MESSAGES<<EOF" >> $GITHUB_ENV
           echo "$COMMIT_MESSAGES" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Release
+        id: release
+        uses: softprops/action-gh-release@v2.2.1
         with:
           tag_name: v${{ env.NEW_VERSION }}
-          release_name: v${{ env.NEW_VERSION }}
+          name: v${{ env.NEW_VERSION }}
           body: |
             **Changes:**
             ${{ env.COMMIT_MESSAGES }}
@@ -97,13 +90,5 @@ jobs:
             Please consider leaving a ⭐ if it's helpful to your server.
           draft: false
           prerelease: false
-
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./${{ env.PLUGIN_NAME }}-${{ env.NEW_VERSION }}.zip
-          asset_name: ${{ env.PLUGIN_NAME }}-${{ env.NEW_VERSION }}.zip
-          asset_content_type: application/zip
+          files: |
+            ./${{ env.PLUGIN_NAME }}-${{ env.NEW_VERSION }}.zip
